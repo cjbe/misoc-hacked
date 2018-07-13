@@ -12,6 +12,10 @@ def get_cpu_mak(cpu):
         triple = "or1k-linux"
         cpuflags = "-mhard-mul -mhard-div -mror -mffl1 -maddc"
         clang = "1"
+    elif cpu == "cortex-a9":
+        triple = "cortex-a9"
+        cpuflags = "-mfpu=vfpv3 -mfloat-abi=hard"
+        clang = ""
     else:
         raise ValueError("Unsupported CPU type: "+cpu)
     return [
