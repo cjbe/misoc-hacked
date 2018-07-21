@@ -13,9 +13,9 @@ def get_cpu_mak(cpu):
         cpuflags = "-mhard-mul -mhard-div -mror -mffl1 -maddc"
         clang = "1"
     elif cpu == "cortex-a9":
-        triple = "cortex-a9"
-        cpuflags = "-mfpu=vfpv3 -mfloat-abi=hard"
-        clang = ""
+        triple = "arm-linux-gnueabihf"
+        cpuflags = "-mcpu=cortex-a9"
+        clang = "1"
     else:
         raise ValueError("Unsupported CPU type: "+cpu)
     return [
