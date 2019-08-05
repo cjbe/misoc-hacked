@@ -7,10 +7,10 @@ namespace std {
   template<class ForwardIt, class T>
   ForwardIt upper_bound(ForwardIt first, ForwardIt last, const T& value) {
       auto count = last - first;
-
+   
       while (count > 0) {
-          auto it = first;
-          const auto step = count / 2;
+          auto it = first; 
+          const auto step = count / 2; 
           it += step;
           if (!(value < *it)) {
               first = ++it;

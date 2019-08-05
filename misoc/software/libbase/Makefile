@@ -2,9 +2,9 @@ include ../include/generated/variables.mak
 include $(MISOC_DIRECTORY)/software/common.mak
 
 OBJECTS  = libc.o ctype.o strtod.o qsort.o errno.o crc16.o crc32.o
-OBJECTS += id.o system.o uart.o console.o time.o spiflash.o exception.o
+OBJECTS += id.o system.o console.o 
 
-all:: crt0-$(CPU).o libbase.a libbase-nofloat.a
+all:: libbase.a libbase-nofloat.a
 
 libbase.a: $(OBJECTS) printf.o
 	$(archive)

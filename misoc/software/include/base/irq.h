@@ -18,7 +18,8 @@ static inline unsigned int irq_getie(void)
 #elif defined (__or1k__)
 	return !!(mfspr(SPR_SR) & SPR_SR_IEE);
 #else
-#error Unsupported architecture
+	return 0;
+//#error Unsupported architecture
 #endif
 }
 
@@ -32,7 +33,7 @@ static inline void irq_setie(unsigned int ie)
 	else
 		mtspr(SPR_SR, mfspr(SPR_SR) & ~SPR_SR_IEE);
 #else
-#error Unsupported architecture
+//#error Unsupported architecture
 #endif
 }
 
@@ -45,7 +46,8 @@ static inline unsigned int irq_getmask(void)
 #elif defined (__or1k__)
 	return mfspr(SPR_PICMR);
 #else
-#error Unsupported architecture
+	return 0;
+//#error Unsupported architecture
 #endif
 }
 
@@ -56,7 +58,7 @@ static inline void irq_setmask(unsigned int mask)
 #elif defined (__or1k__)
 	mtspr(SPR_PICMR, mask);
 #else
-#error Unsupported architecture
+// #error Unsupported architecture
 #endif
 }
 
@@ -69,7 +71,8 @@ static inline unsigned int irq_pending(void)
 #elif defined (__or1k__)
 	return mfspr(SPR_PICSR);
 #else
-#error Unsupported architecture
+	return 0;
+// #error Unsupported architecture
 #endif
 }
 

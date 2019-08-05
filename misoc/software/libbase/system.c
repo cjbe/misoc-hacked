@@ -35,7 +35,7 @@ void flush_cpu_icache(void)
 	for (i = 0; i < cache_size; i += cache_block_size)
 		mtspr(SPR_ICBIR, i);
 #else
-#error Unsupported architecture
+//#error Unsupported architecture
 #endif
 }
 
@@ -63,7 +63,7 @@ void flush_cpu_dcache(void)
 	for (i = 0; i < cache_size; i += cache_block_size)
 		mtspr(SPR_DCBIR, i);
 #else
-#error Unsupported architecture
+//#error Unsupported architecture
 #endif
 }
 
@@ -81,7 +81,7 @@ void flush_l2_cache(void)
 #elif defined (__or1k__)
 		__asm__ volatile("l.lwz %0, 0(%1)\n":"=r"(dummy):"r"(addr));
 #else
-#error Unsupported architecture
+//#error Unsupported architecture
 #endif
 	}
 }

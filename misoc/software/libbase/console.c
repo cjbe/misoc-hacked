@@ -78,3 +78,23 @@ int printf(const char *fmt, ...)
 
 	return len;
 }
+
+int fprintf(FILE *stream, const char *fmt, ...)
+{
+	// Just print everything to the console.
+	(void)stream;
+
+	va_list args;
+	int len;
+	char outbuf[PRINTF_BUFFER_SIZE];
+
+	va_start(args, fmt);
+	len = vscnprintf(outbuf, sizeof(outbuf), fmt, args);
+	va_end(args);
+	outbuf[len] = 0;
+	putsnonl(outbuf);
+
+	return len;
+}
+
+int fflush(FILE* stream) { return 0; }

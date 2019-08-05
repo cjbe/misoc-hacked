@@ -60,7 +60,7 @@ RUSTOUT = cargo/$(CARGO_TRIPLE)/debug
 export CC_$(subst -,_,$(CARGO_TRIPLE)) = clang
 export CFLAGS_$(subst -,_,$(CARGO_TRIPLE)) = $(CFLAGS)
 ifeq ($(TRIPLE),arm-linux-gnueabihf)
-	export RUSTFLAGS = -Crelocation-model=static -Copt-level=s
+	export RUSTFLAGS = -Crelocation-model=static -Clink-dead-code
 else
 	export RUSTFLAGS = -Ctarget-feature=+mul,+div,+ffl1,+cmov,+addc -Crelocation-model=static -Copt-level=s
 endif

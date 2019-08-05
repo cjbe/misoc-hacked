@@ -6,15 +6,25 @@ COMMONFLAGS += -integrated-as -I. \
 	-I$(MISOC_DIRECTORY)/software/unwinder/include/ \
 	-I$(LIBUNWIND_DIRECTORY) \
 	-D__ELF__ -D__linux__ \
-	-D_LIBUNWIND_NO_HEAP -D_LIBUNWIND_BUILD_ZERO_COST_APIS \
+	-D_LIBUNWIND_NO_HEAP \
 	-DNDEBUG
+
+# The libunwind code itself obviously doesn't require EH to work (so avoid
+# emitting cleanups that reference the personality funcion), but we need
+# to be able to start unwinding from _Unwind_RaiseException et al.
+CXXFLAGS += -fno-exceptions -funwind-tables
 
 ifeq ($(CPU),or1k)
 all:: libunwind-bare.a libunwind-elf.a
 endif
+ifeq ($(CPU),cortex-a9)
+all:: libunwind-bare.a libunwind-elf.a
+endif
+
 
 libunwind-%.a: UnwindRegistersSave.o UnwindRegistersRestore.o \
-		UnwindLevel1-%.o UnwindLevel1-gcc-ext-%.o libunwind-%.o
+		UnwindLevel1-%.o UnwindLevel1-gcc-ext-%.o libunwind-%.o \
+		Unwind-EHABI-%.o
 	$(archive)
 
 %.o: $(MISOC_DIRECTORY)/software/unwinder/src/%.S
